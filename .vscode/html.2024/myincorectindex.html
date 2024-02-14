@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UFT-8"/>
+    <meta name="viewport" content="width=device-width"/>
+    <title>
+      
+    </title>
+
+  </head>
+  
+  <body id="body">
+    <div id="spiral" class="spiral"></div>
+    
+    <script >
+      const words ="M";//add as ore words as needed
+    const ANIMATION_DURATION = 4000; //ms
+
+    //separate each character to its own div
+    const character = words.split("") .forEach((char, i) => {
+    function createElement(offset){
+      const div= document.createElement("div");
+      div.innerText = char;
+      div.classList.add("character");
+      div.style.animationDelay=`-${i*(ANIMATION_DURATION/16) - offset}ms`
+
+      return div;
+      }
+
+      document.getElementById("spiral").append(createElement(0));
+      });
+    </script>
+    <style>
+      .body{
+        height: 100%;
+        margin:0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: black;
+        overflow: hidden;
+      }
+      .spiral{
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        position:absolute;
+      }
+      @property --angle {
+        syntax:  '<angle>';
+        initial-value: 0deg;
+        inherit: false;
+      }
+      @keyframes spiral {
+        0%{
+          --angle: 0deg;
+        }
+        100%{
+          --angle: 360deg;
+        }
+      character {
+          color: rgb(0, 0, 0);
+          font-size :4em;;
+          transform: translateY(calc(sin(var(--angle))*100px)) scale(calc(co(var(--angle))*0.5 + 0.5));
+          animation: spiral 4s linear infinite;
+        }
+      }
+    </style>
+  </body>
+</html>

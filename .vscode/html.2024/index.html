@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width"/>
+    <title></title>
+  </head>
+  
+  <body>
+    <div id="spiral" class="spiral"></div>
+    
+    <script>
+      const words = "GOOD MORNING :)"; // add more words as needed
+      const ANIMATION_DURATION = 4000; // ms
+
+      const character = words.split("").forEach((char, i) => {
+        function createElement(offset) {
+          const div = document.createElement("div");
+          div.innerText = char;
+          div.classList.add("character");
+          div.style.animationDelay = `-${i * (ANIMATION_DURATION / 16) - offset}ms`;
+          return div;
+        }
+
+        document.getElementById("spiral").append(createElement(0));
+      });
+    </script>
+
+    <style>
+      body {
+        height: 100%;
+        margin: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: black;
+        overflow: hidden;
+      }
+
+      .spiral {
+        display: flex;
+        margin-top: 199px;
+        align-items: center;
+        gap: 10px;
+        position: absolute;
+      }
+
+      :root {
+        --angle: 0deg;
+      }
+
+      @keyframes spiral {
+        0% {
+          --angle: 0deg;
+        }
+        100% {
+          --angle: 360deg;
+        }
+      }
+
+      .character {
+        color: rgb(255, 255, 255);
+        font-size: 5em;
+        transform: translateY(calc(sin(var(--angle)) * 100px)) scale(calc(cos(var(--angle)) * 0.5 + 0.5));
+        animation: spiral 4s linear infinite;
+      }
+    </style>
+  </body>
+</html>
